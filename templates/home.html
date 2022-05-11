@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div style="padding-top: 90px;"></div>
+
+<style>
+    .bg-myphoto-welcome {
+        width: 100%;
+        height: 150vh;
+        background-image: url("{% static 'main/img/3.jpg' %}");
+        background-size: cover;
+        color: #504747;
+    }
+
+    .main-img-text {
+        color: #fff;
+        padding-left: 70vh;
+    }
+</style>
+
+<div class="container-fluid myphoto-section bg-myphoto-welcome">
+    <div class="container">
+        <div class="jumbotron">
+            <h1 class="main-img-text">FR13NDS OFFICIAL</h1>
+            <p class="main-img-text" style="padding-left: 73vh;">Новый хаккери и программисти группы</p>
+        </div>
+    </div>
+</div>
+    {% if user.is_superuser %}
+    {% endif %}
+
+{% endblock content %}

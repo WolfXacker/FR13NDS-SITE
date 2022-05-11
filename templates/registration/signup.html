@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} FR13NDS {% endblock title %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<style>
+    body {
+        background-color: rgb(32, 27, 27);
+        color: #fff;
+    }
+    h2 {
+        text-align: center;
+        padding: 10px;
+
+    }
+    .btn-success {
+        width: 100px;
+    }
+
+    form input {
+        width: 100%;
+    }
+</style>
+
+{% if user.is_authenticated %}
+    <center>
+        <h1>Sorry, (s)he is register !!</h1>
+        <a href="{% url 'home' %}" class="btn btn-danger">Главная</a>
+    </center>
+
+{% else %}
+    <h2>Registration</h2>
+    <form method="post">{% csrf_token %}
+            {{ form|crispy }}
+            <br>
+            <button class="btn btn-success" type="submit">Отправить</button>
+            <br><br><br>
+    </form>
+
+{% endif %}
+{% endblock content %}

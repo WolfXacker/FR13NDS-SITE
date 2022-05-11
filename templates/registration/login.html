@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} FR13NDS | LOGIN{% endblock title %}
+{% block content %}
+
+{% if user.is_authenticated %}
+    <center>
+        <a href="{% url 'home' %}" class="btn btn-danger">Главная</a>
+    </center>
+
+{% else %}
+    <style>
+        .login-div {
+            padding-top: 95px;
+            width: 100vh;
+        }
+    </style>
+
+    <center style="padding-right: 60vh;">
+        <div class="login-div form-group">
+            <form method="post" class="form-login form-control form-control-lg">{% csrf_token %}
+                <h3>Вход</h3> <br>
+                <div class="mb-3 form-control">{{ form.as_p }}</div>
+                <div class="mb-3"><button class="btn btn-primary" type="submit">Вход</button></div>
+            </form>
+        </div>
+    </center>
+    
+    {% endif %}
+
+{% endblock content %}

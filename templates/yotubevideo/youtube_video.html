@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load embed_video_tags %}
+
+{% block content %}
+
+    <style>
+        body {
+            color: #fff;
+        }
+    </style>
+
+    <div style="padding: 90px;"></div>
+    {% if user.is_authenticated %}
+        <center>
+            {% if videos %}
+            <div class="d-flex flex-wrap">
+                {% for item in videos %}
+                <div style="padding-bottom: 10px;"></div>
+                    <h1>{{ item.title }}</h1>
+                        {% video item.url '600x450' %}
+                    </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </center>
+    {% endif %}
+
+{% endblock content %}

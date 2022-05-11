@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<title>FR13NDS</title>
+
+<div style="padding-top: 130px;"></div>
+
+{% if user.is_authenticated %}
+    {% for article in object_list %}
+
+    {% if article %}
+    <center>
+        <div class="container mt-3" style="width: 55%; margin-left: 350px;">
+            <div class="row">
+                <div class="card mb-3">
+                    <div class="card-header">
+                        {{ article.author }} 
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{  article.title }}</h5>
+                        <p class="card-text">{{  article.body | safe | slice:":100" }}</p>
+                        <a href="{% url 'article_detail' article.pk  %}" class="btn btn-primary">Полный учебный</a><br><br>
+                    </div>
+                    <div class="card-footer text-muted">
+                        {{ article.date }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </center>
+    {% endif %}
+    {% endfor %}
+    
+{% endif %}
+{% endblock content %}
+
+

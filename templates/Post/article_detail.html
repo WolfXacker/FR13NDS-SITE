@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+  .card-img-top {
+    width: 500px;
+    height: 800px;
+  }
+
+  .card-title {
+    color: black;
+  }
+
+</style>
+
+<div style="padding-top: 140px;"></div>
+
+{% if user.is_authenticated %}
+
+<center>
+  <div class="container-fluid">
+    <div class="card">
+      <div><br>
+        <h1 class="card-title">{{ object.title }}</h1>
+      </div>
+      <div class="card-body">
+        <div class="col-sm-6">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">{{ object.body | safe}}</h5>
+              <hr>
+              {% if user.is_superuser %}
+              <a href="{% url 'article_new' %}" class="btn btn-outline-success">
+                <span class="fill-button-hover">		
+                  <span class="fill-button-text">Добавыть пост</span>
+                </span>
+            </a> |
+              <a href="{% url 'article_edit' article.pk %}" class="btn btn-outline-success">
+                <span class="fill-button-hover">		
+                  <span class="fill-button-text">Редация пост</span>
+                </span>
+            </a> |
+
+            <a href="{% url 'article_delete' article.pk %}" class="btn btn-outline-success">
+                <span class="fill-button-hover">		
+                  <span class="fill-button-text">Удалить</span>
+                </span>
+            </a>
+              {% endif %}
+              <p class="lead"><br>
+                <a href="{% url 'article_list' %}" class="btn btn-primary btn-lg">« Возвращение</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p></p>
+    </div>
+{% endif %}
+</center>
+{% endblock content %}
