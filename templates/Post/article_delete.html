@@ -3,27 +3,16 @@
 
 {% block content %}
 
-    <div style="padding-top: 90px;"></div>
-
     <style>
         body {
             color: #fff;
         }
 
-        p, button, a {
-            float: left;
-        }
-
-        .a {
-            padding-left: 10px;
-        }
-
     </style>
 
-    <center><br><br>
-        <h1>Postni o'chirish</h1> <br><br>
+    <center>
         <form action="" method="post">{% csrf_token %}
-            <p>"{{ article.name }}" shu xodimni o'chirishni istaysizmi?</p> <br><br>
+            <p><b style="color: yellow;">"{{ article.title }}" </b>shu xodimni o'chirishni istaysizmi?</p> <br><br>
             <button class="btn btn-outline-primary" type="submit">Да</button>
             <a class="btn btn-outline-primary a" href="{% url 'article_detail' object.pk %}">Нет</a>            
         </form>

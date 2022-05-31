@@ -1,93 +1,548 @@
 {% load static %}
-<!DOCTYPE HTML>
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="{% static 'main/assets/css/styles.css' %}">
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>{% block title %}{% endblock %}</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %}<title>FR13NDS | XACKER</title>{% endblock title %}
 
-    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
-    <!-- CSS only -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
     <link rel="stylesheet" href="{% static 'main/bootstrap/css/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'main/assets/css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'main/css/style.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 </head>
 <body>
-    <style>
-        body {
-           background: #2c2c2c;
+
+  <style>
+    .logo {
+      width: 100px;
+    }
+
+    body {
+      background-color: #504747;
+    }
+    a {
+      text-decoration: none;
+      color: #fff;
+    }
+
+    @media only screen and (max-width: 557px){
+        h1 {
+            font-size: 20px;
         }
-    </style>
+      }
 
-{% if user.is_authenticated %}    
-    <!-- Header section --> 
-    <header class="main-header">
-        <div class="container">
-            <div class="main-header__brand">
-                <a href="{% url 'home' %}">
-                    <img src="{% static 'main/img/logo_simple.svg' %}" alt="logo">                
-                    <p class="paragraph">FR13NDS OFFICIAL</p>
-                </a>
-            </div>
-            <nav class="main-navigation" style="padding-left: 400px;">
-                <ul class="main-navigation__items">
-                    <li class="main-navigation__item">
-                        <a href="{% url 'home' %}">Главная</a>
-                    </li>
-                    <li class="main-navigation__item">
-                        <a href="{% url 'article_list' %}">Новости</a>
-                    </li>
-                    <li class="main-navigation__item">
-                        <a href="{% url 'youtube_video' %}">Видео</a>
-                    </li>
-                    <li class="main-navigation__item">
-                        <a href="{% url 'password_change' %}">Преобразование пароль</a>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: sans-serif;
+        background-color: rgba(0, 0, 0, 0.7);
+    }
+
+    header {
+        padding-top: 10px;
+        width: 100%;
+    }
+
+    nav {
+        margin-left: 80px;
+    }
+
+    nav .h1 {
+        color: #fff;
+        display: inline-block;
+        font-size: 30px;
+        font-weight: 700;
+        margin: 20px 0;
+    }
+
+    nav ul {
+        display: inline-block;
+        float: right;
+        margin-right: 150px;
+        margin-top: 20px;
+    }
+
+    nav ul li {
+        padding-top: 3px;
+        cursor: pointer;
+        color: #fff;
+        display: inline-block;
+        list-style: none;
+        margin-right: 20px;
+    }
+
+    nav ul li a {
+        color: #fff;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 16.5px;
+    }
+
+    nav ul li::after {
+        content: '';
+        width: 100%;
+        height: 0px;
+        display: block;
+        background-color: #fa4659;
+        margin-top: 10px;
+    }
+
+    nav ul li:hover::after {
+        height: 4px;
+        transition: 0.5s;
+    }
+
+    .div-button {
+        margin-top: 200px;
+        text-align: center;
+        color: #fa4659;
+    }
+
+    .div-button .h1 {
+        font-size: 50px;
+        margin-bottom: 10px;
+    }
+
+
+
+    .Mdesign{
+        font-size:22px;
+        border-width:2px;
+        border-style:solid;
+        text-decoration:none;
+        padding-left:30px;
+        padding-right:30px;
+        border-radius:40px;
+      }
+      
+      
+    .Bdesign{
+        font-family: 'Amatic SC', cursive;
+    }
+      
+    .S{
+        background-color:#EC407A;
+        border-color:#F8BBD0;
+        color:#F8BBD0;
+    }
+      
+      
+    @keyframes slide {
+        0% {
+          transform:translateX(-25%);
+        }
+        100% {
+          transform:translateX(25%);
+        }
+    }
+
+    .rotate-button {
+        display:inline-block;
+        width:150px;
+        height: 30px;
+        text-align:center;
+        transform-style:preserve-3d;
+        cursor:pointer;
+        transition:all .3s ease;
+        font-family: 'arial'
+      }
+
+    .rotate-button .rotate-button-face, .rotate-button .rotate-button-face-back {
+        position:absolute;
+        display:block;
+        border:1px solid #35495e;
+        transition:all .5s;
+        color:#35495e;
+        text-decoration:none;
+        width:150px;
+        height: 30px;
+        line-height:30px;
+        border-radius: 4px;
+    }
+
+    .rotate-button .rotate-button-face {
+        background-color:#fff;
+        transform:translateZ(15px);
+    }
+      
+    .rotate-button .rotate-button-face-back {
+        background-color:#35495e;
+        color:#42b883;
+        border:1px solid #42b883;
+        transform:rotateX(-90deg) translateZ(15px);
+    }
+
+    .rotate-button:hover {
+        transform:rotateX(90deg);
+    }
+
+    /* fill button */
+
+    .fill-button {
+        position: relative;
+        display:inline-block;
+        width:150px;
+        height:30px;
+        border:1px solid #fff;
+        text-align:center;
+        box-sizing:border-box;
+        color:#35495e;
+        text-decoration:none;
+        cursor: pointer;
+        line-height:28px;
+        font-family: 'arial';
+        border-radius: 4px;
+    }
+    .fill-button > span {
+        display:block;
+    }
+    .fill-button > .fill-button-hover:after, .fill-button > .fill-button-hover:before {
+        position:absolute;
+        top:0;
+        opacity:0;
+        display:block;
+        content:"";
+        width:0;
+        height:30px;
+    }
+    .fill-button > .fill-button-hover:after {
+        background-color:#35495e;
+        transform:skewX(45deg);
+        transform-origin:center center;
+        transition:all .35s, opacity .4s;
+        left:50%;
+    }
+    .fill-button .fill-button-hover:before {
+        background-color:#42b883;
+        transition:opacity 1s;
+    }
+      
+    .fill-button .fill-button-text {
+        z-index:1;
+        position:relative;
+        color:#fff;
+        transition:color .35s;
+    }
+    .fill-button:hover .fill-button-text {
+        color:#42b883;
+    }
+    .fill-button .fill-button-hover:hover:after {
+        opacity:1;
+        left:2%;
+        width:95%;
+        transform:skewX(45deg);
+    }
+    .fill-button > .fill-button-hover:hover:before {
+        opacity: 1;
+        left: 0;
+        width:100%;
+    }
+
+      
+      .dropdown .dropbtn {
+        font-size: 16px;  
+        border: none;
+        outline: none;
+        color: white;
+        padding: 14px 16px;
+        background-color: inherit;
+        font-family: inherit;
+        margin: 0;
+      }
+      
+      .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+      }
+      
+      .dropdown-content a {
+        float: none;
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        text-align: left;
+      }
+      
+      .dropdown-content a:hover {
+        background-color: #ddd;
+      }
+      
+      .dropdown:hover .dropdown-content {
+        display: block;
+      }
+
+      *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Lato', sans-serif;
+        font-family: 'Oswald', sans-serif;
+      }
+      .wrapper{
+        z-index: 1;
+        position: fixed;
+        top: 0;
+        /*left: -100%;*/
+        right: -100%;
+        height: 100%;
+        width: 100%;
+        background: #000;
+        transition: all 0.6s ease-in-out;
+      }
+      #active:checked ~ .wrapper{
+        right:0;
+      }
+      .menu-btn{
+        position: absolute;
+        z-index: 2;
+        right: 20px;
+        /*left: 20px; */
+        top: 20px;
+        height: 50px;
+        width: 50px;
+        text-align: center;
+        line-height: 50px;
+        border-radius: 50%;
+        font-size: 20px;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+      }
+      .menu-btn span,
+      .menu-btn:before,
+      .menu-btn:after{
+          content: "";
+          position: absolute;
+          top: calc(50% - 1px);
+          left: 30%;
+          width: 40%;
+          border-bottom: 2px solid #000;
+          transition: transform .6s cubic-bezier(0.215, 0.61, 0.355, 1);
+      }
+      .menu-btn:before{
+        transform: translateY(-8px);
+      }
+      .menu-btn:after{
+        transform: translateY(8px);
+      }
+      
+      
+      .close {
+          z-index: 1;
+          width: 100%;
+          height: 100%;
+          pointer-events: none;
+          transition: background .6s;
+      }
+      
+      /* closing animation */
+      #active:checked + .menu-btn span {
+          transform: scaleX(0);
+      }
+      #active:checked + .menu-btn:before {
+          transform: rotate(45deg);
+        border-color: #fff;
+      }
+      #active:checked + .menu-btn:after {
+          transform: rotate(-45deg);
+        border-color: #fff;
+      }
+      .wrapper ul{
+        position: absolute;
+        top: 60%;
+        left: 50%;
+        height: 90%;
+        transform: translate(-50%, -50%);
+        list-style: none;
+        text-align: center;
+      }
+      .wrapper ul li{
+        height: 10%;
+        margin: 15px 0;
+      }
+      .wrapper ul li a{
+        text-decoration: none;
+        font-size: 30px;
+        font-weight: 500;
+        padding: 5px 30px;
+        color: #fff;
+        border-radius: 50px;
+        position: absolute;
+        line-height: 50px;
+        margin: 5px 30px;
+        opacity: 0;
+        transition: all 0.3s ease;
+        transition: transform .6s cubic-bezier(0.215, 0.61, 0.355, 1);
+      }
+      .wrapper ul li a:after{
+        position: absolute;
+        content: "";
+        background: #fff;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        border-radius: 50px;
+        transform: scaleY(0);
+        z-index: -1;
+        transition: transform 0.3s ease;
+      }
+      .wrapper ul li a:hover:after{
+        transform: scaleY(1);
+      }
+      .wrapper ul li a:hover{
+        color: #1a73e8;
+      }
+      input[type="checkbox"]{
+        display: none;
+      }
+      .content{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: -1;
+        text-align: center;
+        width: 100%;
+        color: #202020;
+      }
+      .content .title{
+        font-size: 40px;
+        font-weight: 700;
+      }
+      .content p{
+        font-size: 35px;
+        font-weight: 600;
+      }
+      
+      #active:checked ~ .wrapper ul li a{
+        opacity: 1;
+      }
+      .wrapper ul li a{
+        transition: opacity 1.2s, transform 1.2s cubic-bezier(0.215, 0.61, 0.355, 1);
+        transform: translateX(100px);
+      }
+      #active:checked ~ .wrapper ul li a{
+          transform: none;
+          transition-timing-function: ease, cubic-bezier(.1,1.3,.3,1);
+        transition-delay: .6s;
+        transform: translateX(-100px);
+      }
+
+    @media only screen and (min-width: 969px){  
+        .menu-btn {
+            display: none;
+          }
+    }
+
+    @media only screen and (max-width: 669px){  
+      .card-img-top {
+          width: 80%;
+      }
+    }
+
+    @media only screen and (max-width: 669px){  
+      .card-img-top {
+          width: 80%;
+      }
+    }
+
+    @media only screen and (max-width: 256px){
+        .card-img-top {
+            width: 100%;
+            height: 300px;
+        }
+    }
+
+    @media only screen and (max-width: 1132px){
+      .aritcle-detail-img {
+          width: 90%;
+      }
+    }
+
+    @media only screen and (max-width: 557px){
+      h1 {
+          font-size: 20px;
+      }
+    }
+  </style>
+
+    <!-- navbar -->
+
+    <section>
+        <header>
+            <nav class="main__nav">
+              <img src="{% static 'main/img/logo_simple.svg' %}" alt="" class="logo" style="padding-bottom: 10px;">
+                <h1 class="h1"><a href="{% url 'home' %}">{{ user.username }}</a></h1>
+                <ul>
+                    {% if user.is_authenticated %}
+                    
+                    <style>
+                          @media only screen and (max-width: 969px){
+                            .main__nav {
+                              display: none;
+                            }
+                          }
+                    </style>
+
+                    <li><a class="nav-a" href="{% url 'home' %}">Главная</a></li>
+                    <li><a class="nav-a" href="{% url 'article_list' %}">Новости</a></li>
+                    <li><a class="nav-a" href="{% url 'youtube_video' %}">Видео</a></li>
+                    <li>
+                        <div class="dropdown">
+                            <button class="dropbtn">Аккаунт 
+                              <i class="fa fa-caret-down"></i>
+                            </button>
+                            <div class="dropdown-content">
+                              <a href="{% url 'password_change' %}">Преобразование пароль</a>
+                              <a href="{% url 'logout' %}">Выход</a>
+                            </div>
+                          </div> 
                     </li>
 
-                    <li class="main-navigation__item">
-                        <a href="{% url 'logout' %}">Выход</a>
-                    </li>
+                    {% else %}
+                    <li class="reg"><a href="{% url 'login' %}">Вход</a></li>
+                    <li class="reg"><a href="{% url 'signup' %}">Регистратсия</a></li>
+
+                    {% endif %}
                 </ul>
             </nav>
-        </div>
-    </header>
-    <!-- /Header section -->
-
-    {% else %}
-    <header class="main-header">
-        <div class="container">
-            <div class="main-header__brand">
-                <a href="{% url 'home' %}">
-                    <img src="{% static 'main/img/logo_simple.svg' %}" alt="logo">                
-                    <p class="paragraph">FR13NDS OFFICIAL</p>
-                </a>
-            </div>
-            <nav class="main-navigation" style="padding-left: 110vh;">
-                <ul class="main-navigation__items">
-                    <li class="main-navigation__item">
-                        <a href="{% url 'login' %}">Вход</a>
-                    </li>
-                    <li class="main-navigation__item">
-                        <a href="{% url 'signup' %}">Регистратсия</a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+        </header>
+    </section>
+    
+    {% if user.is_authenticated %}
+    
+      <head>
+        <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+          <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+        </head>
+      
+        <body>
+          <input type="checkbox" id="active">
+          <label for="active" class="menu-btn"><span></span></label>
+          <label for="active" class="close"></label>
+          <div class="wrapper">
+            <ul>
+      <li><a href="{% url 'home' %}">Главная</a></li>
+      <li><a href="{% url 'article_list' %}">Новости</a></li>
+      <li><a href="{% url 'youtube_video' %}">Видео</a></li>
+      <li><a href="{% url 'my_account' %}">Аккаунт</a></li>
+      </ul>
+      </div>
+      
+      </body>
     {% endif %}
-<main>
+
+    <!-- end navbar -->      
 
     {% block content %}
-    {% endblock %}
-</main>
-
-
-<!-- JavaScript Bundle with Popper -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js" integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/" crossorigin="anonymous"></script>
+    {% endblock content %}
 </body>
-
 </html>

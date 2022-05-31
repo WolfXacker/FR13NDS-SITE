@@ -3,7 +3,6 @@
 
 {% block content %}
 
-<div style="padding-top: 90px;"></div>
 
 <style>
     .bg-myphoto-welcome {
@@ -18,13 +17,23 @@
         color: #fff;
         padding-left: 70vh;
     }
+
+    @media (max-width: 738px) {
+        .main-img-text {
+            display: none;
+        }
+    }
 </style>
 
 <div class="container-fluid myphoto-section bg-myphoto-welcome">
     <div class="container">
         <div class="jumbotron">
             <h1 class="main-img-text">FR13NDS OFFICIAL</h1>
-            <p class="main-img-text" style="padding-left: 73vh;">Новый хаккери и программисти группы</p>
+            <p class="main-img-text" style="padding-left: 70.3vh;">Новый хаккеры и программисты группы</p>
+            {% if user.is_authenticated %}
+            {% else %}
+
+            {% endif %}
         </div>
     </div>
 </div>

@@ -10,9 +10,40 @@ from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from .models import Article
 
+from django.shortcuts import get_object_or_404, render
+from django.http import HttpResponse
+from django.template.loader import get_template
+from xhtml2pdf import pisa
+from django.views.generic import ListView
+
+# Create your views here.
+
+
 class ArticleListView(ListView):
     model = Article
     template_name = 'Post/article_list.html'
+
+def customer_render_pdf_view(request, *args, **kwargs):
+    pk = kwargs.get('pk')
+    customer = get_object_or_404(Article, pk=pk)
+
+    template_path = 'upload_file/pdf1.html'
+    context = {'customer': customer}
+    # Create a Django response object, and specify content_type as pdf
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="report.pdf"'
+    # find the template and render it.
+    template = get_template(template_path)
+    html = template.render(context)
+
+    # create a pdf
+    pisa_status = pisa.CreatePDF(
+       html, dest=response)
+    # if error then show some funy view
+    if pisa_status.err:
+       return HttpResponse('We had some errors <pre>' + html + '</pre>')
+    return response
+
     
 class ArticleDetailView(DetailView):
     model = Article

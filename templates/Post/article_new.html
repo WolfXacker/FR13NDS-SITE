@@ -8,15 +8,17 @@
     <style>
         body {
             color: #fff;
-            float: left;
         }
     </style>
 
-    <form method="post" enctype="multipart/form-data">{% csrf_token %}
-        {{ form.media }}
-        {{ form|crispy }}
-        <br>
-        <button class="btn btn-outline-danger" type="submit">Сохранит</button>
-        <a href="{% url 'article_list' %}" class="btn btn-outline-danger">« Возвращение</a>
-    </form>
+    <center>
+        <form method="post" enctype="multipart/form-data">{% csrf_token %}
+            {{ form.media }}
+            {{ form|crispy }}
+            <br>
+            <button class="btn btn-outline-danger" type="submit">Сохранит</button>
+            <a href="{% url 'article_list' %}" class="btn btn-outline-danger">« Возвращение</a>
+        </form>
+    </center>
+
 {% endblock content %}
